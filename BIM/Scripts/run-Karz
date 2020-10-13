@@ -1,0 +1,75 @@
+#!/bin/sh
+
+bindir=${bindir-../bin/}; export bindir
+
+resultsdir=${resultsdir-../results/}; export resultsdir
+
+prognames=${prognames-"uf_fifo uf_lo uf_hi uf_ar uf_dfs uf_bfs uf_lds"}; export prognames
+
+klist=${klist-"10"}; export klist
+
+cutnumseeds=${cutnumseeds-1}; export cutnumseeds
+
+killprogs={}
+
+seedlist=${seedlist-`awk "BEGIN {s=28431; for(i=0; i<${cutnumseeds};i++) {s+=10; print s}}"`}; export seedlist
+
+tempfile=/tmp/Karz`date +%s`
+suffix=Karz
+l=10
+
+for prog in $prognames
+  do
+    rm -f ${resultsdir}$prog.$suffix
+    echo "$prog.$suffix" >> ${resultsdir}$prog.$suffix
+    echo "   Nodes     Arcs     Size  Op. Cnt.        Time"  >> ${resultsdir}$prog.$suffix
+  done
+gs=1
+
+
+for k in $klist
+do
+  sd=1  	
+  a=`expr $k "*" $k`
+  f=`expr $a / 2`   
+  	for prog in $prognames
+	  do
+	    echo "-1 $a $f" >> ${resultsdir}$prog.$suffix
+	  done
+  for seed in $seedlist
+  do
+    echo "c Generator setting:  $gs       Seed #:  $sd"
+    echo "${bindir}Karz -k$k -l$l -a$a -d10 -f$f -s$seed| sort -r > $tempfile"
+    ${bindir}Karz -k$k -l$l -a$a -d10 -f$f -s$seed | sort -r > $tempfile
+    for prog in $prognames
+    do
+       ok=1
+       for kp in $killprogs
+       	  do
+       	  if [ $prog = $kp ]
+	  then	
+             ok=0
+          fi
+       done
+       if [ $ok = 1 ]
+       then
+	  ex-prog $prog $tempfile $suffix
+# here we detect whether something went wrong with program
+# execution. The only thing that should go "wrong" is the exceeding of cpu
+# time limit. When this happens we save time by placing the program in
+# the kill list (because all other instances of this size (and larger
+# sizes) would probably cause the program to exceed the time limit again 
+          if [ $? != 0 ]
+          then
+              echo "probably cpu time limit exceeded for " $prog
+              killprogs="$killprogs $prog"
+          fi
+       else
+          echo "$prog not executed (present in kill list)"
+       fi
+    done    
+    rm -f $tempfile
+    sd=`expr $sd + 1`
+  done
+  gs=`expr $gs + 1`
+done

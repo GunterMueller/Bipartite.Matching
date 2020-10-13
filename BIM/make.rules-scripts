@@ -1,0 +1,27 @@
+# -*- makefile -*-
+
+# Generic make rules for scripts packages
+
+all: $(BINARIES)
+
+clean:
+
+realclean:
+
+# Rules to install and uninstall executables:
+
+ifndef NO_INSTALL
+
+install: $(SCRIPTS)
+	$(INSTALL) $(SCRIPTS) $(BIN_DIR)	
+
+uninstall:
+	rm -f $(addprefix $(BIN_DIR)/, $(SCRIPTS))
+
+else
+
+install: 
+
+uninstall:
+
+endif

@@ -1,0 +1,6 @@
+build_standalone()
+import (libm3)
+import (parseparams)
+
+implementation(unibm)
+Program(unibm)

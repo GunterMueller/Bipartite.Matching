@@ -1,0 +1,74 @@
+#!/bin/sh
+bindir=${bindir-../bin/}; export bindir
+
+resultsdir=${resultsdir-../results/}; export resultsdir
+
+prognames=${prognames-"uf_fifo uf_lo uf_hi uf_ar uf_dfs uf_bfs uf_lds"}; export prognames
+
+numvertices=${numvertices-"1000"}; export numvertices
+
+cutnumseeds=${cutnumseeds-1}; export cutnumseeds
+
+seedlist=${seedlist-`awk "BEGIN {s=25; for(i=0; i<${cutnumseeds};i++) {s+=10; print s}}"`}; export seedlist
+
+killprogs={}
+
+tempfile=/tmp/unimf`date +%s`
+typelist=$@
+avdg=10
+
+for type in $typelist
+do
+  for prog in $prognames
+  do
+    rm -f ${resultsdir}$prog.$type
+    echo "$prog.$type" >> ${resultsdir}$prog.$type
+    echo "   Nodes     Arcs     Size  Op. Cnt.        Time"  >> ${resultsdir}$prog.$type  
+  done
+
+  gs=1
+  for n in $numvertices
+  do
+    sd=1  	
+    m=`expr $n "*" $avdg`
+      for prog in $prognames
+      do
+        echo "-1 $n $m" >> ${resultsdir}$prog.$type
+      done
+    for seed in $seedlist
+    do
+      echo "c Generator setting:  $gs       Seed #:  $sd"
+      rm -f $tempfile
+      echo "$type $n $avdg $seed -s-f > $tempfile"
+      $type $n $avdg $seed -s-f > $tempfile
+      head $tempfile
+      for prog in $prognames
+      do
+          ok=1
+          for kp in $killprogs
+       	     do
+       	     if [ $prog = $kp ]
+	     then	
+                ok=0
+             fi
+          done
+          if [ $ok = 1 ]
+          then
+            ex-prog $prog $tempfile $type	
+	    if [ $? != 0 ]
+            then
+                 echo "probably cpu time limit exceeded for " $prog
+                 killprogs="$killprogs $prog"
+            fi
+          else
+            echo "$prog not executed (present in kill list)"
+          fi
+      done
+      # rm -f $tempfile
+      sd=`expr $sd + 1`
+    done
+    gs=`expr $gs + 1`
+  done
+done
+
+

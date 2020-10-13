@@ -1,0 +1,355 @@
+unimf.m3 2689
+DirGraph.m3 289
+FileFmt.m3 113
+XRandom.m3 958
+DirGraph.i3 1019
+FileFmt.i3 505
+XRandom.i3 249
+$ 0
+@unimf.m3
+Aunimf
+Hd6303591 1 8
+IRete
+K2af84a87 576 9
+Lfraction 0 64 94fe32f6
+Lmarks 64 256 33b9555d
+Lkind 320 8 d6303591
+LNV 352 32 97e237e2
+LNE 384 32 97e237e2
+LW 416 32 97e237e2
+LL 448 32 97e237e2
+LscaleUppers 480 8 1e59237d
+Lcomment 512 32 50f86574
+Gcd6a8271 2af84a87 64
+Pa04ab9c9 cd6a8271
+K2221d265 384 6
+Lspec 0 32 a04ab9c9
+Lomit 32 256 33b9555d
+Lseed 288 32 c413062b
+LdontScramble 320 8 1e59237d
+Lreverse 328 8 1e59237d
+Lcomment 352 32 50f86574
+R0837c0f1 0 00000000 0
+Rf8049a08 1 00000000 2
+Spp fcd9faab
+TParseParams.Error
+TRd.EndOfFile
+Qddde2d9a 2221d265
+R1c3a6b2c 2 00000000 0
+So ddde2d9a
+Srnd 780efbe8
+R0cf06a32 1 00000000 0
+Scmt 50f86574
+Q6901323b 96fecdc4
+Qd507b578 2af84a87
+R3fe27408 3 00000000 0
+SG 6901323b
+Sspec d507b578
+Srnd 780efbe8
+Qa855a3cd 57aa5c32
+Q768522c8 897add37
+Qb9286be7 46d79418
+R52f50e16 11 00000000 0
+SmOld 6cfa19d7
+ScOld 97e237e2
+Sspec d507b578
+Srnd 780efbe8
+Su 97e237e2
+Sv 97e237e2
+SvLo 97e237e2
+SvHi 97e237e2
+Se a855a3cd
+Sm 768522c8
+Sc b9286be7
+Qbe8e56e0 4171a91f
+Q9305e628 6cfa19d7
+Q681dc81d 97e237e2
+R026efcc0 8 00000000 0
+SmOld 6cfa19d7
+ScOld 97e237e2
+Sspec d507b578
+Su 97e237e2
+Sv 97e237e2
+Se be8e56e0
+Sm 9305e628
+Sc 681dc81d
+K6d83eca6 256 8
+LNV 0 32 97e237e2
+LNE 32 32 97e237e2
+LvMap 64 32 e397683d
+Lexp 96 32 a05610b2
+LeLo 128 32 e397683d
+LeHi 160 32 e397683d
+LvLo 192 32 e397683d
+LvHi 224 32 e397683d
+R335c6dd1 3 00000000 0
+SG 6901323b
+Sspec d507b578
+Srnd 780efbe8
+Pe2121af9 97e237e2
+R5d46530b 11 00000000 0
+Skind d6303591
+Ss 97e237e2
+St 97e237e2
+SW 97e237e2
+SL 97e237e2
+SvLo 97e237e2
+SvHi 97e237e2
+Srnd 780efbe8
+Se a855a3cd
+Sm 768522c8
+Sc b9286be7
+R2a394965 10 00000000 0
+Ss 97e237e2
+St 97e237e2
+SW 97e237e2
+SL 97e237e2
+SvLo 97e237e2
+SvHi 97e237e2
+Srnd 780efbe8
+Se a855a3cd
+Sm 768522c8
+Sc b9286be7
+Reb9495fc 0 be5e948d 0
+R14efa2eb 1 217fba22 0
+Spr a855a3cd
+Q0bff0c24 f400f3db
+Rb304d413 2 00000000 0
+Spr a855a3cd
+Spx 0bff0c24
+Q6b01cd09 94fe32f6
+R9c8cc9e2 2 00000000 0
+SctGE 681dc81d
+SremGE 6b01cd09
+R8982f952 1 94fe32f6 0
+Sn 97e237e2
+R4ea5913a 1 1e59237d 0
+Srnd 780efbe8
+Rd8499e14 5 00000000 0
+Srnd 780efbe8
+Sn 97e237e2
+Slo 97e237e2
+Shi 97e237e2
+Sv b9286be7
+R8f566e60 2 00000000 0
+Srnd 780efbe8
+Sv b9286be7
+R6cc67f9a 1 48e16572 0
+Sx 48e16572
+R3a337c2d 1 48e16572 0
+Srnd 780efbe8
+Rab457578 4 00000000 0
+Swhat 50f86574
+Sx 195c2a74
+Slo 94fe32f6
+Shi 94fe32f6
+DMain
+CStdio
+CDirGraph
+CText
+CProcess
+CParseParams
+CXRandom
+CMath
+CASCII
+CFmt
+CThread
+CRd
+CWr
+CRTHooks
+E94fe32f6 unimf.LONG
+E1e59237d unimf.BOOL
+Ed6303591 unimf.Kind
+E96fecdc4 unimf.Graph
+E2af84a87 unimf.SubstSpec
+Ecd6a8271 unimf.SubstSpecs
+E2221d265 unimf.Options
+E6d83eca6 unimf.ExpTables
+Q927c1359 6d83eca6
+E4171a91f unimf.AddReteSubGraph.PathRange
+E195c2a74 unimf.AddReteSubGraph.PathIndex
+@DirGraph.m3
+ADirGraph
+R0602803f 2 97e237e2 0
+Slo 195c2a74
+Shi 195c2a74
+Qb9286be7 46d79418
+R8f566e60 2 00000000 0
+Srnd 780efbe8
+Sv b9286be7
+DDirGraph
+CFileFmt
+CXRandom
+CThread
+CFmt
+CWr
+CRTHooks
+Q6901323b 96fecdc4
+Qcc46aaa2 33b9555d
+Qa855a3cd 57aa5c32
+Q681dc81d 97e237e2
+Qbe8e56e0 4171a91f
+@FileFmt.m3
+AFileFmt
+R155079ff 0 00000000 1
+TRd.EndOfFile
+DFileFmt
+CThread
+CLex
+CTextWr
+CTextRd
+CWr
+CRd
+CRTHooks
+@XRandom.m3
+AXRandom
+N2aa0581d 195c2a74 0 56 8
+N29a0581c 195c2a74 1 55 8
+Fc340dcfb 29a0581c 195c2a74 1760
+Vb1336cb3 780efbeb 2 0 6 1792 XRandom_^%#%^__0001M
+Xinit XRandom.Init
+Xinteger XRandom.Integer
+Xreal XRandom.Real
+Xlongreal XRandom.Longreal
+Xextended XRandom.Extended
+Xboolean XRandom.Boolean
+Li 0 8 2aa0581d
+La 32 1760 c340dcfb
+Rf1b465c5 2 780efbe8 0
+St 780efbe8
+Sseed c413062b
+R336dd8db 2 00000000 0
+St 780efbe8
+Sseed 195c2a74
+N28a0581c 195c2a74 1 54 8
+R9215894b 1 00000000 0
+St 780efbe8
+Rc6cf9888 3 195c2a74 0
+St 780efbe8
+Smin 195c2a74
+Smax 195c2a74
+Rc23afd63 1 1e59237d 0
+St 780efbe8
+R48b57aba 3 48e16572 0
+St 780efbe8
+Smin 48e16572
+Smax 48e16572
+R38554ebb 3 94fe32f6 0
+St 780efbe8
+Smin 94fe32f6
+Smax 94fe32f6
+R1e1ec88e 3 9ee024e3 0
+St 780efbe8
+Smin 9ee024e3
+Smax 9ee024e3
+DXRandom
+CRandomReal
+CWord
+CRTHooks
+Z780efbe8 b1336cb3
+Rd4f21c29 2 195c2a74 0
+Sx 195c2a74
+Sy 195c2a74
+N2da6581d 195c2a74 0 31 8
+R6fb7d834 2 195c2a74 0
+Sx 195c2a74
+Sn 2da6581d
+@DirGraph.i3
+BDirGraph
+G46d79418 97e237e2 64
+N8b2831d7 195c2a74 0 1 8
+F4171a91f 8b2831d7 97e237e2 64
+G57aa5c32 4171a91f 64
+G897add37 6cfa19d7 64
+Pbe5e948d 57aa5c32
+P0c8dfb34 897add37
+Pe397683d 46d79418
+K96fecdc4 288 9
+LNV 0 32 97e237e2
+LNE 32 32 97e237e2
+Le 64 32 be5e948d
+Ls 96 32 97e237e2
+Lt 128 32 97e237e2
+Lm 160 32 0c8dfb34
+Lc 192 32 e397683d
+Lclass 224 32 50f86574
+Lcmt 256 32 50f86574
+Q6901323b 96fecdc4
+Qcc46aaa2 33b9555d
+R2e99f99d 4 00000000 0
+Swr 62761487
+Sg 6901323b
+SvBase 195c2a74
+Somit cc46aaa2
+Rb6b2c277 2 00000000 0
+Sg 6901323b
+Srnd 780efbe8
+R60ead0fb 1 00000000 0
+Sg 6901323b
+Qa855a3cd 57aa5c32
+R07a1b860 1 00000000 0
+Se a855a3cd
+DDirGraph
+CASCII
+CXRandom
+CWr
+CRTHooks
+E97e237e2 DirGraph.Count
+E46d79418 DirGraph.Counts
+E97e237e2 DirGraph.VertexNum
+E46d79418 DirGraph.VertexNums
+E4171a91f DirGraph.Edge
+E57aa5c32 DirGraph.Edges
+E97e237e2 DirGraph.EdgeNum
+E46d79418 DirGraph.EdgeNums
+E97e237e2 DirGraph.Cost
+E46d79418 DirGraph.Costs
+E6cfa19d7 DirGraph.Mark
+E897add37 DirGraph.Marks
+E96fecdc4 DirGraph.T
+@FileFmt.i3
+BFileFmt
+R30aa149e 3 00000000 0
+Swr 62761487
+Stype 50f86574
+Sversion 50f86574
+Rb9d80d55 2 00000000 0
+Swr 62761487
+Stype 50f86574
+R75d5a121 3 00000000 0
+Srd fa67ef2f
+Stype 50f86574
+Sversion 50f86574
+Re1c7433e 2 00000000 0
+Srd fa67ef2f
+Stype 50f86574
+R89b48651 2 50f86574 0
+Stype 50f86574
+Sversion 50f86574
+R50ba05d5 1 50f86574 0
+Stype 50f86574
+R52b7a5db 3 00000000 0
+Swr 62761487
+Scomment 50f86574
+Sprefix 56e16863
+R1ced2f4c 2 50f86574 0
+Srd fa67ef2f
+Sprefix 56e16863
+DFileFmt
+CRd
+CWr
+CRTHooks
+@XRandom.i3
+BXRandom
+Y780efbe8 780efbeb
+Nc413062b 195c2a74 0 1717986911 32
+R780efbea 1 780efbe8 0
+Sseed c413062b
+V780efbeb 484193f3 0 1 0 0
+Winit 780efbea
+DXRandom
+CRandom
+CRTHooks
+E780efbe8 XRandom.T
+E780efbeb XRandom.Public
+Ec413062b XRandom.Seed

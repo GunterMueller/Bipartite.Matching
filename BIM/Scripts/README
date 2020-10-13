@@ -1,0 +1,75 @@
+This directory contains scripts to perform 2 groups of tasks:
+
+1) for creating test instances and running the programs
+2) for producing tables and plots from raw experimental data
+
+Each is group is described below. 
+---
+
+1) Scripts to create test instances from various problem classes and
+then run several implementations on those instances.
+
+All scripts work by writing an instance to a temporary file and then
+running each specified implementation on that instance.  Output is
+placed in appropiately named files in the results directory.
+
+There are several parameter values affecting behaviour which can
+either be set as environment variables or in the scripts. These
+include:
+
+bindir		binary location
+resultsdir	results directory
+prognames	list of implementations to execute
+numvertices	list of graph sizes (not used by Karz)
+typelist	list of graph types for unibm or unimf 
+cutnumseeds	number of seeds used for each graph size
+seedlist	list of seeds to use
+
+The files in this directory include:
+
+ Blow 		script used to create family of unimf
+ Dobl		"
+ Puff		"
+ Saus		"
+ Squa		"
+ Wave		"
+ Makefile	
+
+(Also included are scripts for families Qasq and Desq, which are variants of
+Squa. We do not report results for these families because they are similar
+to the results of Squa).
+
+ ex-prog	set arguments required for specific implementatiosn
+ run-HiLo	runs HiLo generator
+ run-Karz	runs Karz generator
+ run-all	run all problem generators
+ run-bim	run all bipartite matching generators
+ run-rbg2	run rgb2 generator (takes fewg or manyg as parameter)
+ run-rmfu	run rmfu generator (takes wide, cube or long ar parameter)
+ run-uf		run all unit-flow generators
+ run-unibm	run unibm generator (takes list of classes as parameter)
+ run-unimf	run unibm generator (takes list of classes as parameter)
+
+Some of these scripts assume a command "${bindir}pow X Y" that prints 
+the exponential "X**Y", rounded down to the nearest integer.
+
+---
+2) Scripts for producing tables and plots from raw experimental data
+
+The main script is "table.csh", which should be invoked thus:
+
+   $ table.csh <problem> <resultsdir>
+
+where <problem> is "uf" or "bim" and <resultsdir> is the subdirectory
+from BASE (the main directory) where raw results are. This script runs
+scripts "crunch.awk" and "pp.awk" (using `gawk' for both).
+
+The output is an ASCII file (<family>.data) and a LaTeX 2.09 file
+(<family>.tex) for each family of instances, containing a table with
+results. The .data file is used for plot generation by gnuplot. All
+the files thus generated will be in directory <resultsdir>.
+
+To generate plots, you should run gnuplot in directory <resultsdir>
+giving as a command-line parameter the file bim_plot or uf_plot (which
+are in this directory!). They will generate encapsulated .ps files,
+one for each family.

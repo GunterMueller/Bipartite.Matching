@@ -1,0 +1,12 @@
+This directory contains a C++ implementation of the 
+breadth-first search algorithm specialized for the bipartite
+mathcing problem.  Include files containing the data
+structures used are all found in the include directory.
+
+ Makefile	
+ bfs.cc		Code for bipartite matching
+ bfs.h		Header for bipartite matching
+ bfs_run.cc	Code that sets up the run by calling the parser
+		and produces output at the end
+
+

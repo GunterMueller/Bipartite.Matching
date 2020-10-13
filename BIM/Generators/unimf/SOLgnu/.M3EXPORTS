@@ -1,0 +1,12 @@
+% exports of unimf
+_define_pgm("unimf")
+import_version("libm3", "SOLgnu")
+import_version("m3core", "SOLgnu")
+import_version("parseparams", "SOLgnu")
+_map_add_interface("XRandom.i3", "unimf", "src", "hidden")
+_map_add_interface("FileFmt.i3", "unimf", "src", "hidden")
+_map_add_interface("DirGraph.i3", "unimf", "src", "hidden")
+_map_add_module("DirGraph.m3", "unimf", "src", "hidden")
+_map_add_module("unimf.m3", "unimf", "src", "hidden")
+_map_add_module("FileFmt.m3", "unimf", "src", "hidden")
+_map_add_module("XRandom.m3", "unimf", "src", "hidden")

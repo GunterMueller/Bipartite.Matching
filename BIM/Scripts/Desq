@@ -1,0 +1,45 @@
+#! /bin/csh -f
+
+# Squarish, doubled edges:  (family name: Desq)
+
+set usage = "$0 NV AVGD SEED STAG FLAGS"
+
+# AVGD is the average outdegree (or indegree)
+# NOTE: NV and AVGD apply BEFORE the edge doubling!
+
+set NV = "$1"; shift
+set avgd = "$1"; shift;
+set seed = "$1"; shift;
+set tag = "$1"; shift;
+set flgs = ( $* )
+
+if ( ! $?bindir ) then
+  echo 'must define environment variable $bindir'; exit 1
+endif
+
+@ T = ${NV} - 2
+set W = `${bindir}pow ${T} 0.5`
+@ L = ( ${T} / ${W} ) + 1
+
+@ NE = ${NV} * ${avgd}
+@ minNE = ${W} * ${L}
+
+if ( ${NE} < ${minNE} ) then
+  echo "average degree too low"; exit 1
+endif
+
+# Path-block parameters:
+
+@ NEP = 2
+@ NVP = ${NEP} + 1
+@ WP = 1
+@ LP = 2
+
+set name = /tmp/Desq.jcs
+
+set echo
+${bindir}unimf \
+  -seed ${seed} ${flgs} \
+  -subst 1.00 T -by Rete  -NV ${NV} -NE ${NE} -W ${W} -L ${L} \
+  -subst 1.00 T -by Rete  -NV ${NVP} -NE ${NEP} -W ${WP} -L ${LP} \
+  | sort -r

@@ -1,0 +1,354 @@
+void printArc(arc *a)
+{
+  cout << "   (" << a->reverseArc()->head()->index()+1 << "," <<
+    a->head()->index()+1 << ")";
+}
+
+// forw declaration
+bool globalUpdate(simpleQueue &Q);
+
+bool Relabel(node *u) 
+{
+  arc  *a;
+  arc  *minA;  // the arc out of u with lowest head
+  node *v;
+  long minD;   // the height of the head 
+  long d;
+
+#ifdef DBG
+  cout << "relabeling node " << u->index()+1 << "\n";
+#endif
+  minD = LARGE;
+  minA = u->lastOutArc();
+  forallOutArcs(a,u) {
+#ifdef DBG
+    cout << "relabel: arc ";
+    printArc(a);
+    cout << " use:" << a->isUsed() << "; head reached:" <<
+      a->head()->isReached() << "\n";
+#endif
+    if (a->isAvailable() && !a->head()->isReached()) {
+      d = a->head()->getDistance();
+      if (d < minD) {
+	minD = d;
+	minA = a;
+      }
+    }
+  }
+/*
+  assert(minD+1 > u->getDistance());
+  u->setDistance(minD+1);       // relabel u relative to minA
+  if (minD+1 < G.numNodes()) {
+  if (minD < LARGE) {
+    u->setCurrent(minA);        // set the current arc pointer of u
+    return true;
+  }
+  else return false;
+*/
+  if (minD == LARGE) return false;
+  else
+    {
+      u->setDistance(minD+1);
+      u->setCurrent(minA);
+      return true;
+    }
+}
+
+void augment(simpleQueue &S)
+{
+  node *u;
+  arc *a;
+
+  while (!S.isEmpty()) {
+    u = S.pop();
+    a = u->getCurrent();     
+    a->use();
+#ifdef STATS
+    stats.pushCnt++;
+#endif
+
+  }
+}   
+
+void LDSUnitFlow(simpleQueue &S1, simpleQueue &S2, simpleQueue &Q)
+{
+  node *u, *v, *init_v;
+  arc  *a, *curr, *a2, *aa;
+  long relsSinceUpdate = 0; // used to determine when to perform global update
+
+  // We use two stacks: one (S1) for holding the path and another (S2)
+  // for holding all vertices explored in a search. 
+  // Note that we only place a node u on the stack S1 after we know
+  // that there's an admissible arc (u,v). Hence, when we are scanning
+  // a node u, u is the head of an arc whose tail is on the top of
+  // the stack.
+  // CHANGED: we do place node u that is being searched on the stack.
+  // S2 is used to unmark vertices after a successful search
+
+  forallNodes(u,G) u->initialize();
+  if (!globalUpdate(Q))
+    {
+      cout << "ERROR: source does not reach sink\n";
+      return;
+    }
+#ifdef DBG
+  cout << "First global update done\n";
+#endif
+  G.getSource()->setReached(true);
+  forallOutArcs(a, G.getSource()) // source neighbor loop
+    {
+#ifdef DBG
+      cout << "Source: Looking at arc ";
+      printArc(a);
+      cout << "\n";
+#endif
+      assert(!a->isUsed());
+      init_v = a->head();
+      if (init_v->isReached()) continue;
+      // start search from init_v
+      if (init_v == G.getSink()) 
+	{
+	  a->use();
+#ifdef STATS
+	  stats.pushCnt++;
+#endif
+	  continue;
+	}
+      G.getSource()->setCurrent(a);
+      init_v->setReached(true);
+      u = init_v;
+      S1.enqueue(u); 
+      S2.enqueue(u);
+#ifdef DBG
+      cout << "placing " << u->index()+1 << " in S1/2\n";
+#endif
+      while (1) // search loop
+	{
+#ifdef DBG
+	  cout << "Searching from " << u->index()+1 << "\n";
+#endif
+	  curr = u->getCurrent();
+	  forallOutArcsAfter(aa, u, curr) // scan loop
+	    {
+#ifdef DBG
+	      cout << "Looking at arc ";
+	      printArc(aa);
+	      cout << "\n";
+#endif
+	      if (aa->isUsed()) {
+#ifdef DBG
+		cout << ": is used\n";
+#endif
+		continue; // cap == flow
+	      }
+	      v = aa->head();
+	      if (u->getDistance() <= v->getDistance()) {
+#ifdef DBG
+		cout << ": wrong label; " << u->getDistance() 
+		  << " and " << v->getDistance() << "\n";
+#endif
+		continue; // wrong label
+	      }
+	      if (v->isReached()) {
+#ifdef DBG
+		cout << ": head visited\n";
+#endif
+		continue; // already visited
+	      }
+	      // found admissible arc
+#ifdef DBG
+	      cout << "admissible\n";
+#endif
+	      if (v == G.getSink())
+		{
+		  // found augmenting path
+#ifdef DBG
+		  cout << "augmenting path found\n";
+#endif
+		  u->setCurrent(aa);
+		  // aa->use(); // because this arc is not on the stack
+		  augment(S1);
+		  G.getSource()->getCurrent()->use(); // neither this one
+		  // clean up
+		  // u->setReached(false); // u never entered the stack
+#ifdef DBG
+		  // cout << u->index()+1 << " is now unreached\n";
+#endif		      
+		  while (!S2.isEmpty())
+		    {
+		      u = S2.pop();
+#ifdef DBG
+		      cout << u->index()+1 << " is now unreached\n";
+#endif		      
+		      u->setReached(false);
+		    }
+		  goto ContinueSourceNeighborLoop;
+		}
+	      else
+		{
+		  // advance
+		  S1.enqueue(v); 
+		  S2.enqueue(v);
+#ifdef DBG
+		  cout << "placing " << v->index()+1 <<
+		    " in S1/2\n";
+		  cout << "advancing\n";
+#endif
+		  u->setCurrent(aa);
+		  u = v;
+		  u->setReached(true);
+		  goto ContinueSearchLoop;
+		}
+	    }
+	  // we can only be here if there's NO admissible arc 
+	  // (end of scan loop was reached)
+#ifdef DBG
+	  cout << "no admissible arc\n";
+#endif
+	  // u->setCurrent(aa); // I must explain why I need this stmt * *
+	  relsSinceUpdate++;
+	  if (relsSinceUpdate > param.globalUpdateFreq *(double)G.numNodes()) {
+#ifdef DBG
+	    cout << "-- global relabel --\n";
+#endif
+	    if (!globalUpdate(Q)) return;
+	    relsSinceUpdate = 0;
+	  }
+#ifdef STATS
+	  stats.relabelCnt++;
+#endif
+	  if (Relabel(u))
+	    {
+#ifdef DBG
+	      cout << "relabel success\n";
+#endif
+	      // S1.enqueue(u);
+	      // S2.enqueue(u);  // u already in S2
+	      aa = u->getCurrent();
+#ifdef DBG
+	      cout << "relabel's admissible arc is ";
+	      printArc(aa);
+	      cout << "\n";
+#endif	      
+	      u = aa->head();
+	      u->setReached(true);
+
+	      S1.enqueue(u);
+	      S2.enqueue(u);
+#ifdef DBG
+	      cout << "placing " << u->index()+1 << " in S1/2\n";
+#endif
+	    }
+	  else 
+	    {
+#ifdef DBG
+	      cout << "relabel failure\n";
+#endif
+	      if (u == init_v) {
+		// back to first vertex
+		// visited vertices remain marked
+		S2.reinitialize();
+#ifdef DBG
+		cout << "back to first vertex\n";
+#endif		
+		goto ContinueSourceNeighborLoop;
+	      }
+	      /* retreat */
+#ifdef DBG
+	      cout << "retreat\n";
+#endif
+	      u = S1.pop();
+#ifdef DBG
+	      cout << "just popped " << u->index()+1 << " from stack\n";
+#endif
+	      u = S1.top();
+	      a2 = u->getCurrent();
+	      u->setCurrent(++a2); // low level!!!
+	    }
+	ContinueSearchLoop: ;
+	}
+    ContinueSourceNeighborLoop: ;
+    }
+}      
+		
+bool globalUpdate(simpleQueue &Q)
+{
+  node *u, *v;
+  arc  *e;
+  DistType  currentDistance; // the current depth in the breadth first search
+
+#ifdef STATS
+  stats.updateCnt++;
+#endif
+
+  Q.reinitialize();
+  forallNodes(u,G) u->setDistance(VERY_FAR); // mark all nodes as unlabeled
+  G.getSink()->setDistance(0);           // set sink to distance 0
+  Q.enqueue(G.getSink());                // add the sink to the queue
+  while (!Q.isEmpty()) {      
+    v = Q.dequeue();
+    currentDistance = v->getDistance();  // distance of node being scanned
+    forallOutArcs(e,v) {
+      arc &ee = *e;
+      u = ee.head();
+      if (u->getDistance() < VERY_FAR) continue;
+      if (e->isAvailable()) continue;
+      u->setDistance(currentDistance+1);
+      Q.enqueue(u);
+    }
+  }
+  return (G.getSource()->getDistance() < VERY_FAR);
+}
+
+void CheckFlow(simpleQueue &Q)
+{
+  node *u, *v;
+  long f, fs = 0, ft = 0;
+  arc *a;
+  // int pi[500];
+
+  forallOutArcs(a,G.getSource()) if (a->isUsed()) fs++;
+  forallOutArcs(a,G.getSink()) if (a->isAvailable()) ft++;
+  if (fs != ft)
+    {
+      cout << "ERROR: flow out of s(" << fs << ") != flow into t(" << ft << ")\n";
+    }
+  // maximality check with BFS
+  forallNodes(u,G)
+    {
+      u->setDistance(VERY_FAR);
+    }
+  u = G.getSource();
+  u->setDistance(0);
+  Q.reinitialize();
+  Q.enqueue(u);
+  // pi[u->index()] = -1;
+  do 
+    {      
+      v = Q.dequeue();
+      forallOutArcs(a,v) {
+	if (a->isUsed()) continue;
+	u = a->head();
+	if (u->getDistance() < VERY_FAR) continue;
+	if (u == G.getSink())
+	  {
+	    // pi[u->index()] = v->index();
+	    cout << "ERROR: flow not maximum!\n";
+	    /* cout << "Augmenting path is:\n";
+	    int i = u->index();
+	    do {
+	      cout << "arc " << i+1 << "<-" << pi[i]+1 << "\n";
+	      i = pi[i];
+	    } while (i != -1);
+	    */
+	    return;
+	  }
+	else
+	  {
+	    u->setDistance(0);
+	    Q.enqueue(u);
+	    // pi[u->index()] = v->index();
+	  }
+      }
+    } while (!Q.isEmpty());
+}

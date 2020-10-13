@@ -1,0 +1,36 @@
+# -*- makefile -*-
+
+# Generic make rules for C++ packages
+
+all: $(BINARIES) $(OBJS)
+
+ifndef NO_INSTALL
+install: $(BINARIES) $(OBJS)
+	$(INSTALL) $(BINARIES) $(BIN_DIR)	
+
+uninstall:
+	rm -f $(addprefix $(BIN_DIR)/, $(BINARIES))
+
+clean:
+	rm -f $(BINARIES) *.o 
+
+realclean: clean
+	rm -f $(BINARIES:%=.%.d) $(OBJS:%.o=.%.d) 
+endif
+
+# rule to generate dependencies for C++
+.%.d: $(MAIN)
+	$(CXX) -MM $(CXXFLAGS) $($(@)_opts) $< |sed "/${<:%.cc=%.o}/s//$*/" >$@
+# rule to remake binaries for C++
+$(BINARIES): $(MAIN) $(OBJS)
+	$(CXX) $(CXXFLAGS) $(CXX_LIB_FLAGS) $($(@)_opts) $(MAIN) $(OBJS) -o $@ $(CXX_LIBS)
+
+# include the dependencies
+# setting ndep inhibits this step. desirable usage:
+# make clean ndep=1 
+ifndef ndep
+-include $(BINARIES:%=.%.d)
+ifdef OBJS
+-include $(OBJS:%.o=.%.d)
+endif
+endif

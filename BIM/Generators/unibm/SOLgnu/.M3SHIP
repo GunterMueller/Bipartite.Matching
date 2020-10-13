@@ -1,0 +1,9 @@
+
+make_dir("/n/lac/pkg/m3-3.5.3/PUB/pkg/unibm/SOLgnu")
+install_file(".M3EXPORTS", "/n/lac/pkg/m3-3.5.3/PUB/pkg/unibm/SOLgnu", "0644")
+install_file(".M3IMPTAB", "/n/lac/pkg/m3-3.5.3/PUB/pkg/unibm/SOLgnu", "0644")
+install_file(".M3WEB", "/n/lac/pkg/m3-3.5.3/PUB/pkg/unibm/SOLgnu", "0644")
+make_dir("/n/lac/pkg/m3-3.5.3/PUB/pkg/unibm/src")
+install_file("../src/unibm.m3", "/n/lac/pkg/m3-3.5.3/PUB/pkg/unibm/src", "0644")
+make_dir("/n/lac/pkg/m3-3.5.3/PUB/sun4-SunOS-5.5/bin")
+install_file("unibm", "/n/lac/pkg/m3-3.5.3/PUB/sun4-SunOS-5.5/bin", "0755")

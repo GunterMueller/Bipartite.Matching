@@ -1,0 +1,115 @@
+file: README
+
+This file documents the contents of directory bipmatch.
+
+This directory contains several programs that implement algorithms for
+the bipartite matching problem in unweighted graphs. Except where
+noted (see below), all programs were written by Joao Carlos Setubal
+(setubal@dcc.unicamp.br), who also wrote this documentation.  You can use
+and modify the codes freely, but please acknowledge authorship.  If a
+bibliographic reference is needed, use the following:
+
+J. C. Setubal, Sequential and Parallel Experimental Results with
+Bipartite Matching Algorithms. Technical Report IC-96-09, Institute of
+Computing, State University of Campinas (Brazil), 1996.
+
+A postscript file containing this tech report is in directory
+techreport, compressed with gzip. It will be easier to understand what
+each code does if you read the tech report first.
+
+Please direct any inquiries or bug reports to
+setubal@dcc.unicamp.br. Any feedback will be greatly appreciated.
+
+The following is a one-line description of the contents of each
+subdirectory in this directory:
+
+abmp/    :an implementation of the ABMP algorithm
+bcm/     :code written by F. Chang and S. T. McCormick 
+bfs/     :an implementation the breadth-first-search algorithm
+dfs/     :a C version of the code in directory bcm
+gen/     :two bipartite graph generators
+libap/   :auxiliary routines for code in subdirs abmp and pr 
+libdb/   :auxiliary routines for code in subdirs dfs and bfs
+pr/      :an implementation of the push-relabel algorithm
+techreport/  :the ps file
+
+Each directory where there's code contains a makefile. By reading it
+you will learn how to generate all executables. A few details are
+given next.
+
+BIPARTITE MATCHING CODES
+
+For the codes in directories abmp and pr you'll have to go to directory
+libap and say "make all"; and then in both abmp and pr you say
+"make match".
+
+For the codes in directories bfs and dfs you'll have to go to directory
+libdb and say "make all"; and then in both bfs and dfs you say
+"make match".
+
+In all cases the file "match" will be the executable. Usage is simply
+"match <input [<output file>]". Input files are bipartite graphs
+G=(U,V,E), in the following format:
+
+modified DIMACS input format (adapted to bipartite graphs):
+
+c <Comment lines>
+p bipartite-matching <# vertices in U = n_u> <# vertices in V = n_v> <# edges>
+a <src> <dst>
+
+The last kind of line should be repeated for each edge present in the
+input graph.
+
+Note that the codes assume that vertices in *each* partition are
+numbered from 1 consecutively up to n_u (or n_v).
+
+Solution graphs (output):
+
+c <Comment lines>
+s <matching size>
+f <src> <dst> -- matched edges
+
+Most of the code in files manip.c, io.c, and utility.c was written by
+Richard Anderson (anderson@cs.washington.edu).
+
+Here are a few details about the codes in directory bcm.
+
+Code bcm.f (in FORTRAN) was written by Frank Chang and Tom McCormick. I
+added calls to timing routines, whose source is in C and is in
+timer.c. The executable is named "bcm" by the makefile. This
+code accepts input in a format different from the one described
+above. For this reason I created a filter (d2b.c) that converts
+"dimacs" format to "bcm" format. The makefile tells you how to compile
+these programs.
+
+GENERATORS
+
+In directory gen there are three programs that generate bipartite
+graphs: rbg1.c, rbg2.c, and chang.c. The first two were written by
+J. C. Setubal and the last by Frank Chang.
+
+rbg1.c generates a random bipartite graph where each partition has the
+same number of vertices. The command line parameters are number of
+vertices in one partition, expected number of edges per vertex, and an
+optional seed for the pseudorandom number generator.
+
+rbg2.c generates a random bipartite graph where there is some
+structure in the form of "groups". A certain number of
+consecutively-numbered vertices from one partition forms a group.
+Each vertex from U in group i can have neighbors in groups i-1, i, i+1
+in V, only. There's "wraparound" in that a vertex in group G can be
+connected to a vertex in group G-1, G, or 1.  All groups have the same
+number of vertices. The program accepts as command line parameters
+values for N, G, ENE, and an optional seed, where:
+
+N = number of vertices in a group
+G = number of groups
+ENE = number of expected edges per vertex
+seed = for the pseudorandom number generator
+
+Most of the code in file random.c was written by Richard Anderson
+(anderson@cs.washington.edu).
+
+For chang.c please see the code.
+
+---------------------end of file README

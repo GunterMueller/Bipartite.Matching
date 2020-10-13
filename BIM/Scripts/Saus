@@ -1,0 +1,36 @@
+#! /bin/csh -f
+
+# Long sausage, simple structure:
+
+set usage = "$0 NV AVGD SEED STAG FLAGS"
+
+# AVGD is the average outdegree (or indegree)
+
+set NV = "$1"; shift
+set avgd = "$1"; shift;
+set seed = "$1"; shift;
+set tag = "$1"; shift;
+set flgs = ( $* )
+
+if ( ! $?bindir ) then
+  echo 'must define environment variable $bindir'; exit 1
+endif
+
+@ W = 3
+@ L = ( ${NV} - 2 ) / ${W}
+
+@ NE = ${NV} * ${avgd}
+@ minNE = ${W} * ${L}
+
+if ( ${NE} < ${minNE} ) then
+  echo "average degree too low"; exit 1
+endif
+
+set name = /tmp/Saus.jcs
+
+set echo
+${bindir}unimf \
+  -seed ${seed} ${flgs} \
+  -subst 1.00 T -by Rete  -NV ${NV} -NE ${NE} -W ${W} -L ${L} \
+  | sort -r
+

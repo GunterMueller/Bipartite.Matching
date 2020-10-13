@@ -1,0 +1,120 @@
+M3 v4.2
+N0 unibm
+
+M0 1 10 0 0 1 0 24 0 0 18 0 0
+N1 Main
+A1
+N2 Stdio
+B2
+N3 Text
+B3
+N4 Process
+B4
+N5 ParseParams
+B5
+N6 Random
+B6
+N7 Math
+B7
+N8 Fmt
+B8
+N9 Thread
+B9
+N10 Wr
+B10
+N11 RTHooks
+B11
+D6
+N12 stdout
+V0 2 12 8d6db1d8112c6904
+i0
+N13 stderr
+V1 2 13 9d726ab4a6705813
+i1
+N14 AllocateOpenArray
+V2 11 14 db2df1609bb1bb57
+i2
+N15 PutText
+V3 10 15 76d5556a4fea2594
+i3
+N16 ReportFault
+V4 11 16 0d3292e6ba1d83b9
+i4
+N17 Allocate
+V5 11 17 3dcfa7ba250fc60e
+i5
+N18 Int
+V6 8 18 c841c285fe2842b2
+i6
+N19 Concat
+V7 11 19 a7c87e88a25211fd
+i7
+N20 LongReal
+V8 8 20 8ba7e3babdfb8b70
+i8
+N21 Real
+V9 8 21 74f5290cc6d1c8cd
+i9
+N22 log
+V10 7 22 20f05d7666531a41
+i10
+N23 exp
+V11 7 23 b0632e115222624e
+i11
+N24 sqrt
+V12 7 24 021278995052c637
+i12
+N25 log10
+V13 7 25 93c97a6d72ee2d96
+i13
+N26 Pad
+V14 8 26 4f5b294b2f288bae
+i14
+N27 Flush
+V15 10 27 007994b22f093b51
+i15
+N28 Error
+V16 5 28 e59da58989f25e3a
+i16
+N29 Equal
+V17 3 29 a3f490929d6abc3e
+i17
+N30 Exit
+V18 4 30 bf2fe304c2d57489
+i18
+N31 T
+V19 5 31 4fb21fee97bcde17
+i19
+N32 Default
+V20 6 32 973fd384bc2b398b
+i20
+N33 Alerted
+V21 9 33 3ae605d9dcac0a20
+i21
+V22 10 31 77ec1ed10766de4d
+i22
+N34 Failure
+V23 10 34 96bc0ebc7fd3bf50
+i23
+t70dd2817
+t7b78c34f
+t62761487
+t983b02e7
+t1bee6e85
+ta6a06b63
+t7cfe252f
+tf2a35a9d
+t97f166d3
+t95aa481c
+t0618d641
+t88b51541
+t54208904
+tc5f201d2
+tfcd9faab
+tc9d11604
+t69c9f5bb
+tad398276
+o6 484193f3 9d8fb489 0 8 160
+o6 70dd2814 484193f3 0 8 32
+p6 70dd2817 70dd2814 1792 32 0
+O9a1d0fd3 70dd2817 0 8 32

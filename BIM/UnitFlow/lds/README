@@ -1,0 +1,9 @@
+This directory contains a C++ implementation of the 
+label-directed search algorithm specialized for the unit capacity
+maximum flow problem.  Include files containing the data
+structures used are all found in the include directory.
+
+ Makefile	
+ lds.cc		Code for unit capacity maximum flow problem
+ lds_run.cc	Code that sets up the run by calling the parser
+		and produces output at the end

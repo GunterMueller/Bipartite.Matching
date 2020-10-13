@@ -1,0 +1,20 @@
+# -*- makefile -*-
+
+# Generic make rules for Modula-3 packages
+# Assumes $(BINARIES) is a single name
+
+all: ; $(M3BUILD)
+        
+ifndef NO_INSTALL
+
+install: ; $(INSTALL) $(addprefix $(PLATFORM)/, $(BINARIES)) $(BIN_DIR)
+
+uninstall: ; /bin/rm -f $(addprefix $(BIN_DIR)/, $(BINARIES))
+
+# clean: ; /bin/rm -f $(PLATFORM)/$(BINARIES)
+clean: 
+
+# realclean: ; /bin/rm -rf $(PLATFORM)
+realclean: 
+
+endif

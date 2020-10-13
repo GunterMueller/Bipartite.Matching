@@ -1,0 +1,52 @@
+# -*- makefile -*-
+
+# Generic make rules for C packages
+
+all: $(BINARIES) $(OBJS)
+
+clean:
+	rm -f $(BINARIES) *.o 
+
+realclean: clean
+	rm -f $(BINARIES:%=.%.d) $(OBJS:%.o=.%.d) 
+
+# Rules to install and uninstall binaries:
+
+ifndef NO_INSTALL
+
+install: $(BINARIES) $(OBJS)
+	$(INSTALL) $(BINARIES) $(BIN_DIR)	
+
+uninstall:
+	rm -f $(addprefix $(BIN_DIR)/, $(BINARIES))
+
+else
+
+install: 
+
+uninstall:
+
+endif
+
+# rule to generate dependencies for C
+ifndef MAIN
+.%.d : %.c
+	$(CC) -MM $(CFLAGS) $($(@)_opts)  $< |sed "/${<:%.c=%.o}/s//$*/" >$@
+else
+.%.d: $(MAIN)
+	$(CC) -MM $(CFLAGS) $($(@)_opts)  $< |sed "/${<:%.c=%.o}/s//$*/" >$@
+endif
+
+# rule to remake binaries for C
+$(BINARIES): $(MAIN) $(OBJS)
+	$(CC) $(CFLAGS) $(C_LIB_FLAGS) $($(@)_opts) $(MAIN) $(filter %.o, $^) -o $@ $(C_LIBS)
+
+# include the dependencies
+# setting ndep inhibits this step. desirable usage:
+# make clean ndep=1 
+ifndef ndep
+-include $(BINARIES:%=.%.d)
+ifdef OBJS
+-include $(OBJS:%.o=.%.d)
+endif
+endif

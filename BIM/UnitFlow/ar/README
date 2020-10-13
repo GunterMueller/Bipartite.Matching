@@ -1,0 +1,10 @@
+This directory contains a C++ implementation of the 
+augment relabel algorithm specialized for the unit capacity
+maximum flow problem.  Include files containing the data
+structures used are all found in the include directory.
+
+ Makefile	
+ ar.cc		Code for unit capacity maximum flow problem
+ ar_run.cc	Code that sets up the run by calling the parser
+		and produces output at the end
+

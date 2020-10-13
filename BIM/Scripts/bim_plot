@@ -1,0 +1,40 @@
+# settings common for all plots
+set term postscript eps "Times-Roman" 22
+#set term postscript portrait "Times-Roman"
+#set size 0.7,0.7
+set xlabel "number of nodes (logscale)"
+set ylabel "running time in secs (logscale)"
+set logscale xy
+set data style linespoints
+set xrange [30000:525000]
+set xtics(32000,65000,131000,262000,525000)
+# settings specific for each plot
+set yrange [0.4:410]
+set key 38000,120
+set output "HiLo.ps"
+plot "HiLo.data" using 1:2 title 'dfs' , "HiLo.data" using 1:3 title 'bfs', "HiLo.data" using 1:4 title 'lds' , "HiLo.data" using 1:5 title 'ar', "HiLo.data" using 1:6 title 'fifo', "HiLo.data" using 1:7 title 'lo', "HiLo.data" using 1:8 title 'hi'
+set yrange [0.1:600]
+set key 38000,200
+set output "Hexa.ps"
+plot "Hexa.data" using 1:2 title 'dfs' , "Hexa.data" using 1:3 title 'bfs', "Hexa.data" using 1:4 title 'lds' , "Hexa.data" using 1:5 title 'ar', "Hexa.data" using 1:6 title 'fifo', "Hexa.data" using 1:7 title 'lo', "Hexa.data" using 1:8 title 'hi'
+set yrange [0.1:170]
+set key 38000,100
+set output "Grid.ps"
+plot "Grid.data" using 1:2 title 'dfs' , "Grid.data" using 1:3 title 'bfs', "Grid.data" using 1:4 title 'lds' , "Grid.data" using 1:5 title 'ar', "Grid.data" using 1:6 title 'fifo', "Grid.data" using 1:7 title 'lo', "Grid.data" using 1:8 title 'hi'
+set yrange [0.2:650]
+set key 38000,120
+set output "manyg.ps"
+plot "manyg.data" using 1:2 title 'dfs' , "manyg.data" using 1:3 title 'bfs', "manyg.data" using 1:4 title 'lds' , "manyg.data" using 1:5 title 'ar', "manyg.data" using 1:6 title 'fifo', "manyg.data" using 1:7 title 'lo', "manyg.data" using 1:8 title 'hi'
+set yrange [0.1:730]
+set key 38000,120
+set output "fewg.ps"
+plot "fewg.data" using 1:2 title 'dfs' , "fewg.data" using 1:3 title 'bfs', "fewg.data" using 1:4 title 'lds' , "fewg.data" using 1:5 title 'ar', "fewg.data" using 1:6 title 'fifo', "fewg.data" using 1:7 title 'lo', "fewg.data" using 1:8 title 'hi'
+set yrange [0.2:35]
+set key 38000,20
+set output "Rope.ps"
+plot "Rope.data" using 1:2 title 'dfs' , "Rope.data" using 1:3 title 'bfs', "Rope.data" using 1:4 title 'lds' , "Rope.data" using 1:5 title 'ar', "Rope.data" using 1:6 title 'fifo', "Rope.data" using 1:7 title 'lo', "Rope.data" using 1:8 title 'hi'
+set yrange [0.05:5.5]
+set key 38000,3
+set output "Zipf.ps"
+plot "Zipf.data" using 1:2 title 'dfs' , "Zipf.data" using 1:3 title 'bfs', "Zipf.data" using 1:4 title 'lds' , "Zipf.data" using 1:5 title 'ar', "Zipf.data" using 1:6 title 'fifo', "Zipf.data" using 1:7 title 'lo', "Zipf.data" using 1:8 title 'hi'
+

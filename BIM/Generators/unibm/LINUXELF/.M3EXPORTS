@@ -1,0 +1,6 @@
+% exports of unibm
+_define_pgm("JCSGraphs")
+import_version("libm3", "LINUXELF")
+import_version("parseparams", "LINUXELF")
+import_version("m3core", "LINUXELF")
+_map_add_module("JCSGraphs.m3", "unibm", "src", "hidden")

@@ -1,0 +1,11 @@
+This directory contains a C++ implementation of the 
+depth-first search algorithm specialized for the bipartite
+mathcing problem.  Include files containing the data
+structures used are all found in the include directory.
+
+ Makefile	
+ dfs.cc		Code for bipartite matching
+ dfs.h		Header for bipartite matching
+ dfs_run.cc	Code that sets up the run by calling the parser
+		and produces output at the end
+

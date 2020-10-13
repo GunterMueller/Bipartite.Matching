@@ -1,0 +1,21 @@
+This directory contains a C implementation of the bipartite graph
+generators rbg1 and rbg2.
+
+rbg1 produces a random bipartite graph. Usage is:
+
+rbg1 <N/2> <ene> [<seed>]
+
+where N is total number of vertices (each partition will have N vertices)
+      ene is expected vertex degree (can be a floating point number)
+      seed is an optional seed for the pseudo random generator
+
+rbg2 produces a random bipartite graph that has a group
+structure. Usage is:
+
+rbg2 <N> <G> <ene> [<seed>]
+
+where  N is number of vertices per group
+       G is number of groups
+         => total number of vertices is N*G*2 (each partition will have N*G vertices)
+       ene is expected vertex degree (can be a floating point number)
+       seed is an optional seed for the pseudo random generator

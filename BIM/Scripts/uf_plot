@@ -1,0 +1,56 @@
+# settings common for all plots
+set term postscript eps "Times-Roman" 22
+#set term postscript portrait "Times-Roman"
+#set size 0.7,0.7
+set xlabel "number of nodes (logscale)"
+set ylabel "running time in secs (logscale)"
+set logscale xy
+set data style linespoints
+# settings specific for each plot
+set output "Karz.ps"
+set xrange [7000:115000]
+set xtics(7000,14000,28000,56000,115000)
+set yrange [0.02:900]
+set key 9000,500
+plot "Karz.data" using 1:2 title 'dfs' , "Karz.data" using 1:3 title 'bfs', "Karz.data" using 1:4 title 'lds' , "Karz.data" using 1:5 title 'ar', "Karz.data" using 1:6 title 'fifo', "Karz.data" using 1:7 title 'lo', "Karz.data" using 1:8 title 'hi'
+set xrange [16000:263000]
+set xtics(16000,32000,65000,131000,263000)
+set output "Blow.ps"
+set yrange [1:250]
+set key 20000,200
+plot "Blow.data" using 1:2 title 'dfs' , "Blow.data" using 1:3 title 'bfs', "Blow.data" using 1:4 title 'lds' , "Blow.data" using 1:5 title 'ar', "Blow.data" using 1:6 title 'fifo', "Blow.data" using 1:7 title 'lo', "Blow.data" using 1:8 title 'hi'
+set output "Puff.ps"
+set yrange [0.7:440]
+set key 20000,300
+plot "Puff.data" using 1:2 title 'dfs' , "Puff.data" using 1:3 title 'bfs', "Puff.data" using 1:4 title 'lds' , "Puff.data" using 1:5 title 'ar', "Puff.data" using 1:6 title 'fifo', "Puff.data" using 1:7 title 'lo', "Puff.data" using 1:8 title 'hi'
+set output "Saus.ps"
+set yrange [0.1:50]
+set key 20000,30
+plot "Saus.data" using 1:2 title 'dfs' , "Saus.data" using 1:3 title 'bfs', "Saus.data" using 1:4 title 'lds' , "Saus.data" using 1:5 title 'ar', "Saus.data" using 1:6 title 'fifo', "Saus.data" using 1:7 title 'lo', "Saus.data" using 1:8 title 'hi'
+set output "Squa.ps"
+set yrange [0.7:250]
+set key 20000,120
+plot "Squa.data" using 1:2 title 'dfs' , "Squa.data" using 1:3 title 'bfs', "Squa.data" using 1:4 title 'lds' , "Squa.data" using 1:5 title 'ar', "Squa.data" using 1:6 title 'fifo', "Squa.data" using 1:7 title 'lo', "Squa.data" using 1:8 title 'hi'
+set output "Wave.ps"
+set yrange [1:700]
+set key 20000,300
+plot "Wave.data" using 1:2 title 'dfs' , "Wave.data" using 1:3 title 'bfs', "Wave.data" using 1:4 title 'lds' , "Wave.data" using 1:5 title 'ar', "Wave.data" using 1:6 title 'fifo', "Wave.data" using 1:7 title 'lo', "Wave.data" using 1:8 title 'hi'
+set output "rmfuL.ps"
+set yrange [0.3:65]
+set key 20000,50
+plot "rmfuL.data" using 1:2 title 'dfs' , "rmfuL.data" using 1:3 title 'bfs', "rmfuL.data" using 1:4 title 'lds' , "rmfuL.data" using 1:5 title 'ar', "rmfuL.data" using 1:6 title 'fifo', "rmfuL.data" using 1:7 title 'lo', "rmfuL.data" using 1:8 title 'hi'
+set output "rmfuW.ps"
+set yrange [0.4:1310]
+set key 20000,1000
+plot "rmfuW.data" using 1:2 title 'dfs' , "rmfuW.data" using 1:3 title 'bfs', "rmfuW.data" using 1:4 title 'lds' , "rmfuW.data" using 1:5 title 'ar', "rmfuW.data" using 1:6 title 'fifo', "rmfuW.data" using 1:7 title 'lo', "rmfuW.data" using 1:8 title 'hi'
+set output "rmfuC.ps"
+set yrange [0.3:900]
+set key 20000,500
+plot "rmfuC.data" using 1:2 title 'dfs' , "rmfuC.data" using 1:3 title 'bfs', "rmfuC.data" using 1:4 title 'lds' , "rmfuC.data" using 1:5 title 'ar', "rmfuC.data" using 1:6 title 'fifo', "rmfuC.data" using 1:7 title 'lo', "rmfuC.data" using 1:8 title 'hi'
+set output "Qasq.ps"
+set xrange [65000:1050000]
+set xtics(65000,132000,262000,525000,1050000)
+set yrange [1.5:820]
+set key 75000,500
+plot "Qasq.data" using 1:2 title 'dfs' , "Qasq.data" using 1:3 title 'bfs', "Qasq.data" using 1:4 title 'lds' , "Qasq.data" using 1:5 title 'ar', "Qasq.data" using 1:6 title 'fifo', "Qasq.data" using 1:7 title 'lo', "Qasq.data" using 1:8 title 'hi'
+

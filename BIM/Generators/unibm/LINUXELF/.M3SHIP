@@ -1,0 +1,9 @@
+
+make_dir("/usr/local/modula3-3.5.4-B/lib/m3/pkg/unibm/LINUXELF")
+install_file(".M3EXPORTS", "/usr/local/modula3-3.5.4-B/lib/m3/pkg/unibm/LINUXELF", "0644")
+install_file(".M3IMPTAB", "/usr/local/modula3-3.5.4-B/lib/m3/pkg/unibm/LINUXELF", "0644")
+install_file(".M3WEB", "/usr/local/modula3-3.5.4-B/lib/m3/pkg/unibm/LINUXELF", "0644")
+make_dir("/usr/local/modula3-3.5.4-B/lib/m3/pkg/unibm/src")
+install_file("../src/JCSGraphs.m3", "/usr/local/modula3-3.5.4-B/lib/m3/pkg/unibm/src", "0644")
+make_dir("/usr/local/modula3-3.5.4-B/bin/LINUXELF")
+install_file("JCSGraphs", "/usr/local/modula3-3.5.4-B/bin/LINUXELF", "0755")

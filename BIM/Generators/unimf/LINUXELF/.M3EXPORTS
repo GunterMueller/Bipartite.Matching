@@ -1,0 +1,12 @@
+% exports of unimf
+_define_pgm("MaxFlowProbs")
+import_version("libm3", "LINUXELF")
+import_version("parseparams", "LINUXELF")
+import_version("m3core", "LINUXELF")
+_map_add_interface("XRandom.i3", "unimf", "src", "hidden")
+_map_add_interface("FileFmt.i3", "unimf", "src", "hidden")
+_map_add_interface("DirGraph.i3", "unimf", "src", "hidden")
+_map_add_module("FileFmt.m3", "unimf", "src", "hidden")
+_map_add_module("MaxFlowProbs.m3", "unimf", "src", "hidden")
+_map_add_module("XRandom.m3", "unimf", "src", "hidden")
+_map_add_module("DirGraph.m3", "unimf", "src", "hidden")

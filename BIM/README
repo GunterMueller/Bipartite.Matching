@@ -1,0 +1,68 @@
+C and C++
+---------
+
+To compile the C and C++ code (both the implementations of
+the algorithms and the generators):
+
+1) edit the file make.config in this directory -- change BASE to point
+to this directory and change CC and CXX to your C and C++ compiler
+respectively
+
+2) from this directory type
+
+	make install
+
+The binaries will then all be found in the bin subdirectory.  
+The implementations all expect to receive input from standard input
+and write output to standard output.  There are scripts in the
+scripts directory which run the implementations on the generators
+provided in this distribution.
+
+The file make.config is included by all makefiles in this distribution, 
+it is used to set optimization flags and other options which are common to
+multiple applications.  
+
+Modula-3
+--------
+
+To compile the unibm and unimf generators you will need a modula-3
+compiler; this assumes that the relevant modula-3 compiler directories
+are in your path. (A modula-3 compiler is not necessary in the 2 cases
+noted below.)  Edit the file make.config in this directory defining
+variable PLATFORM as appropriate to your system (and also BASE, as in
+(1) above, if you haven't done so). Then edit file Generators/Makefile
+adding `unibm' and `unimf' to variable SUBDIRS. The same command "make
+install" mentioned above will then compile not only the C/C++ codes
+but also the modula-3 codes.
+
+If your PLATFORM is SOLgnu (SPARC) or LINUXELF (Intel Pentium), you
+can use the precompiled binaries in the appropriate subdirectories of
+Generators/unibm and Generators/unimf. In this case you'll have to
+copy these binaries manually to the bin subdirectory.
+
+Other information
+-----------------
+
+If for any reason you need to rebuild all binaries, just type
+
+   make realclean
+
+in this directory before the command "make install". This command will
+delete almost all object files and some other auxiliary files. It will not
+remove the SOLgnu and LINUXELF modula-3 object files.
+
+Index
+-----
+
+ BipMatch/	Contains source code for bipartite matching implementations
+ Generators/	Contains source code for generators
+ Makefile	Recursively calls makefiles in each subdirectory
+ README		
+ UnitFlow/	Contains source code for unit capacity flow implementations
+ bin/		make install creates binaries in this directory
+ common/	contains common code used in several implementations
+ include/	contains common header used in push-relabel implementations
+ make.config	included in all makefiles in this distribution
+ results/	scripts put output in this directory by default
+ Scripts/	contains scripts to perform automated runs
+ Hacks/         auxiliary programs

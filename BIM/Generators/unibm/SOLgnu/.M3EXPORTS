@@ -1,0 +1,6 @@
+% exports of unibm
+_define_pgm("unibm")
+import_version("libm3", "SOLgnu")
+import_version("m3core", "SOLgnu")
+import_version("parseparams", "SOLgnu")
+_map_add_module("unibm.m3", "unibm", "src", "hidden")
